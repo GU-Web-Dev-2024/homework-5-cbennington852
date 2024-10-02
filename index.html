@@ -108,7 +108,7 @@
             <button id="add-art-button">Add New Artwork</button>
 
             <!-- Art Gallery Section -->
-            <section class="art-grid">
+            <section id="art-grid" class="art-grid">
                 <div class="art-panel">
                     <img src="https://via.placeholder.com/200" alt="Starry Night">
                     <p>Starry Night by Vincent van Gogh</p>
@@ -141,6 +141,30 @@
             { title: 'Starry Night Over the Rhône', artist: 'Vincent van Gogh', img: 'https://via.placeholder.com/200' }
         ];
         // Add your JavaScript code here.
+
+        //fucntion to create a new artwork??!?!
+        function createDiv() {
+            const newDiv = document.createElement("div");
+            newDiv.className = "art-panel";
+            newDiv.textContent = "example";
+
+            //add event
+            newDiv.addEventListener("mouseover", () => {
+                newDiv.style.backgroundColor = "#FFFOOO";
+            });
+
+            newDiv.addEventListener("mouseout", () => {
+                newDiv.style.backgroundColor = "black";
+            });
+
+            //add to document model
+            document.getElementById("art-grid").appendChild(newDiv);
+        }
+
+        document.getElementById("add-art-button")
+            .addEventListener("click", createDiv)
+
+
         // Later, move this to an external JavaScript file for better organization.
     </script>
 </body>
