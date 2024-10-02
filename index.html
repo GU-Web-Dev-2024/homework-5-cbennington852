@@ -128,7 +128,7 @@
     <!-- Placeholder for JavaScript Code -->
     <script>
         //amount of artworks viewed
-
+        let numViewed = 0;
         // List of additional artworks to add dynamically
         const newArtworks = [
             { title: 'The Scream', artist: 'Edvard Munch', img: 'https://via.placeholder.com/200' },
@@ -144,24 +144,48 @@
         ];
         // Add your JavaScript code here.
 
+        function  getRandomNum() {
+            return Math.floor(Math.random() * newArtworks.length) + 1;
+        }
+
         //fucntion to create a new artwork??!?!
         function createDiv() {
             const newDiv = document.createElement("div");
+            console.log(typeof newDiv);
             let isViewed = false;
             newDiv.className = "art-panel";
-            newDiv.textContent = "example";
+
+            //select rand artwork
+            let artIndex = getRandomNum();
+
+            //make img and txt
+            const artImg = document.createElement("img");
+            const artText = document.createElement("p");
+
+            //apply random
+            artImg.src = newArtworks[artIndex].img;
+            artImg.alt = newArtworks[artIndex].img;
+            artText.innerText = newArtworks[artIndex].title + " by " + newArtworks[artIndex].artist;
+            console.log(typeof newDiv);
+
+            //make child
+            newDiv.appendChild(artImg);
+            newDiv.appendChild(artText);
+
 
             //add event
             newDiv.addEventListener("mouseover", () => {
-                newDiv.style.backgroundColor = "#FFFOOO";
+                //when mouse enter
             });
 
             newDiv.addEventListener("mouseout", () => {
-                newDiv.style.backgroundColor = "black";
+                //when mouse exit
             });
 
             newDiv.addEventListener("click", () => {
+                numViewed = numViewed + 1;
                 isViewed = true;
+                newDiv.style.backgroundColor = "grey";
             });
 
             //add to document model
