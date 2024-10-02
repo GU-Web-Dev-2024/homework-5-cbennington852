@@ -51,9 +51,19 @@ function createDiv() {
     });
 
     newDiv.addEventListener("click", () => {
-        numViewed = numViewed + 1;
-        isViewed = true;
-        newDiv.style.backgroundColor = "grey";
+        if (isViewed === false) {
+            isViewed = true;
+            newDiv.style.backgroundColor = "grey";
+            numViewed++;
+        }
+        else
+        {
+            isViewed = false;
+            newDiv.style.backgroundColor = "#eee";
+            numViewed--;
+        }
+
+        document.getElementById("counter").innerText = "Artworks Viewed: " + numViewed;
     });
 
     //add to document model
