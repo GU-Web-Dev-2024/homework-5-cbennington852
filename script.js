@@ -1,5 +1,8 @@
 //amount of artworks viewed
 let numViewed = 0;
+
+//list of which are cliked
+
 // List of additional artworks to add dynamically
 const newArtworks = [
     { title: 'The Scream', artist: 'Edvard Munch', img: 'https://via.placeholder.com/200' },
@@ -16,13 +19,20 @@ const newArtworks = [
 // Add your JavaScript code here.
 
 function  getRandomNum() {
-    return Math.floor(Math.random() * newArtworks.length) + 1;
+    return Math.floor(Math.random() * newArtworks.length);
 }
+
+function initListeners() {
+    document.getElementById("reset-button").addEventListener('click', () => {
+        resetAllPanels();
+    });
+}
+
+
 
 //fucntion to create a new artwork??!?!
 function createDiv() {
     const newDiv = document.createElement("div");
-    let isViewed = false;
     newDiv.className = "art-panel";
 
     //select rand artwork
@@ -50,19 +60,18 @@ function createDiv() {
         //when mouse exit
     });
 
+    //adds veiw tracker
     newDiv.addEventListener("click", () => {
-        if (isViewed === false) {
-            isViewed = true;
+
+        if (newDiv.style.backgroundColor !== 'grey') {
             newDiv.style.backgroundColor = "grey";
             numViewed++;
         }
         else
         {
-            isViewed = false;
             newDiv.style.backgroundColor = "#eee";
             numViewed--;
         }
-
         document.getElementById("counter").innerText = "Artworks Viewed: " + numViewed;
     });
 
@@ -70,10 +79,23 @@ function createDiv() {
     document.getElementById("art-grid").appendChild(newDiv);
 }
 
+function resetAllPanels() {
+    const allPanels = document.querySelectorAll(".art-panel");
+
+    allPanels.forEach(panel => {
+        panel.style.backgroundColor = "#eee"; // Reset to default background
+        panel.isViewed = false; // Reset viewed status
+    });
+
+    numViewed = 0; // Reset the view counter
+    document.getElementById("counter").innerText = "Artworks Viewed: " + numViewed;
+}
+
 //populate with random
 document.onload = createDiv();
 document.onload = createDiv();
 document.onload = createDiv();
+document.onload = initListeners ();
 
 
 document.getElementById("add-art-button")
