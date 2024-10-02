@@ -127,6 +127,8 @@
 
     <!-- Placeholder for JavaScript Code -->
     <script>
+        //amount of artworks viewed
+
         // List of additional artworks to add dynamically
         const newArtworks = [
             { title: 'The Scream', artist: 'Edvard Munch', img: 'https://via.placeholder.com/200' },
@@ -145,6 +147,7 @@
         //fucntion to create a new artwork??!?!
         function createDiv() {
             const newDiv = document.createElement("div");
+            let isViewed = false;
             newDiv.className = "art-panel";
             newDiv.textContent = "example";
 
@@ -155,6 +158,10 @@
 
             newDiv.addEventListener("mouseout", () => {
                 newDiv.style.backgroundColor = "black";
+            });
+
+            newDiv.addEventListener("click", () => {
+                isViewed = true;
             });
 
             //add to document model
