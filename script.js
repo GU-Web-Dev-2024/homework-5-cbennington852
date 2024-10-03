@@ -26,6 +26,9 @@ function initListeners() {
     document.getElementById("reset-button").addEventListener('click', () => {
         resetAllPanels();
     });
+    document.getElementById("remove-art-button").addEventListener('click', () => {
+       removeArtwork();
+    });
 }
 
 
@@ -85,6 +88,19 @@ function resetAllPanels() {
     allPanels.forEach(panel => {
         panel.style.backgroundColor = "#eee"; // Reset to default background
         panel.isViewed = false; // Reset viewed status
+    });
+
+    numViewed = 0; // Reset the view counter
+    document.getElementById("counter").innerText = "Artworks Viewed: " + numViewed;
+}
+
+function removeArtwork() {
+    const allPanels = document.querySelectorAll(".art-panel");
+
+    allPanels.forEach(panel => {
+        if (panel.style.backgroundColor === 'grey') {//clicked
+            document.getElementById("art-grid").removeChild(panel);
+        }
     });
 
     numViewed = 0; // Reset the view counter
