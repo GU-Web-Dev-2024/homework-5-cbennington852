@@ -31,7 +31,7 @@ function initListeners() {
     });
 }
 
-
+let removalMode = false;
 
 //fucntion to create a new artwork??!?!
 function createDiv() {
@@ -40,6 +40,7 @@ function createDiv() {
 
     //select rand artwork
     let artIndex = getRandomNum();
+
 
     //make img and txt
     const artImg = document.createElement("img");
@@ -65,8 +66,17 @@ function createDiv() {
 
     //adds veiw tracker
     newDiv.addEventListener("click", () => {
+        if (removalMode === true){
+            //removing time!
+            if (newDiv.style.backgroundColor !== 'grey') {
 
-        if (newDiv.style.backgroundColor !== 'grey') {
+            }
+            else {
+                numViewed--;
+            }
+            document.getElementById("art-grid").removeChild(newDiv);
+        }
+        else if (newDiv.style.backgroundColor !== 'grey') {
             newDiv.style.backgroundColor = "grey";
             numViewed++;
         }
@@ -95,15 +105,15 @@ function resetAllPanels() {
 }
 
 function removeArtwork() {
-    const allPanels = document.querySelectorAll(".art-panel");
-
-    allPanels.forEach(panel => {
-        if (panel.style.backgroundColor === 'grey') {//clicked
-            document.getElementById("art-grid").removeChild(panel);
-        }
-    });
-
-    numViewed = 0; // Reset the view counter
+    if (removalMode === false) {
+        removalMode = true;
+        document.getElementById("remove-art-button").style.backgroundColor = "orange";
+    }
+    else
+    {
+        removalMode = false;
+        document.getElementById("remove-art-button").style.backgroundColor = "#333";
+    }
     document.getElementById("counter").innerText = "Artworks Viewed: " + numViewed;
 }
 
